@@ -20,7 +20,7 @@ function getNumberSum() {
   let sum = 0;
   for (let i = 0; i < splitStrings.length; i++) {
     sum += Number(match[i]);
-    console.log("sum", sum);
+    console.log("sum:", sum);
   }
   return sum;
 }
