@@ -32,4 +32,37 @@ function possibleGameIndexesSum(text: string): number {
   return possibleGameIndexesSum;
 }
 
-console.log(possibleGameIndexesSum(textInput));
+console.log("possibleGameIndexesSum", possibleGameIndexesSum(textInput));
+
+function fewestNumberOfCubesPower(text: string): number {
+  const lines = text.split("\n");
+  let totalPower = 0;
+
+  lines.forEach((line) => {
+    const gameNumberMatch = line.match(/Game (\d+):/);
+    if (gameNumberMatch) {
+      const colorCounts: Record<string, number> = {};
+
+      const matches = line.matchAll(/(\d+)\s+(blue|green|red)/g);
+
+      for (const match of matches) {
+        const count = parseInt(match[1], 10);
+        const color = match[2];
+
+        if (!colorCounts[color] || colorCounts[color] < count) {
+          colorCounts[color] = count;
+        }
+      }
+
+      const gamePower = Object.values(colorCounts).reduce(
+        (product, count) => product * count,
+        1
+      );
+      totalPower += gamePower;
+    }
+  });
+
+  return totalPower;
+}
+
+console.log("fewestNumberOfCubesPower", fewestNumberOfCubesPower(textInput));
